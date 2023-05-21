@@ -27,9 +27,6 @@ SRC = minishell \
 		parsing/expand/expand2 \
 		parsing/split_by_pipe \
 		parsing/count_cmds \
-		environment\get_env_value \
-		environment\find_env \
-		environment\set_env \
 		builtins/unset \
 		builtins/exit \
 		builtins/pwd \

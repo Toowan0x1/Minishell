@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/21 18:05:01 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/21 22:42:33 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ typedef struct s_env
 	struct s_env 	*next;
 	struct s_env 	*prev;
 }               t_env;
+
+
+typedef struct s_redirection
+{
+	int		redirection_token;
+	int		redirection_index;
+	int		outfile_index;
+	int		out_fd;
+	char	*outfile;
+}	t_redirection;
+
+
 
 extern int global_exit;
 
@@ -146,5 +158,16 @@ int		count_cmds(char **cmd, char c);
 //     int		stdin_copy;
 // }	t_var; // cmd_exec_vars
 
+
+
+
+
+void	set_redirect_to_null(char **cmd, int *cmd_tokens);
+int		get_redirection_index(int *cmd_tokens, t_redirection *redirection);
+int		get_outfile_index(int *cmd_tokens, int index);
+void	establish_output_stream(char **cmd, int *cmd_tokens, t_redirection *redirection);
+
+void	dup_output_before_piping(t_redirection *redirection);
+void	dup_output_after_piping(t_redirection *redirection);
 
 #endif

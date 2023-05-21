@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/21 18:00:35 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:15:09 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ int main(int ac, char **av, char **env)
         return (127);
     }
     env_list = create_env_list(env);
+    //redirection = init_redirections();
+    t_redirection *redirection = malloc(sizeof(t_redirection));
+
     line = readline(GREEN"minishell ▸ "WHITE);
-    int walid = 1;
     //global_exit = 0;
     while (1)
     {
@@ -52,7 +54,7 @@ int main(int ac, char **av, char **env)
                 int *args_tokens;
                 char ***cmd;
                 int i;
-                int out_fd = STDOUT;
+                //int out_fd = STDOUT;
                 int stdout_copy = dup(STDOUT);
                 int stdin_copy = dup(STDIN);
                 (void)stdin_copy;
@@ -62,88 +64,18 @@ int main(int ac, char **av, char **env)
                 parsed_line_args = args_split(line);
                 num_of_cmds = count_cmds(parsed_line_args, '|');
                 args_tokens = tokenise_cmd(parsed_line_args);
-                if (walid == 1)
-                {
-                    //printf("======= before expand =========\n");
-                    expand(parsed_line_args, args_tokens, env_list);  // !!!!!
-                }
                 cmd = get_piped_cmd_by_ptr(parsed_line_args, args_tokens);
                 i = 0;
+                // execute_multi_cmds()
                 if (num_of_cmds > 1)
                 {
                     while (i < num_of_cmds - 1)
                     {
-                        /*/*/
-                        int     *cmd_tokens;
-                        cmd_tokens = tokenise_cmd(cmd[i]);
-                        int x = 0;
-                        //int count_outfile = 0;
-                        int redir_token; // fih token >, >>
-                        int redir_index = 0; // fih index dyal token >, >>
-                        int redir_outfile_index = 0; // fih outfile index
-                        //int out_fd = STDOUT;    // out file descriptor
-                        while (cmd_tokens[x])
-                        {
-                            if (cmd_tokens[x] == 4 || cmd_tokens[x] == 7)
-                            {
-                                redir_token = cmd_tokens[x];
-                                redir_index = x;
-                            }
-                            x++;
-                        }
-                        x = redir_index;
-                        while (cmd_tokens[x])
-                        {
-                            if (cmd_tokens[x] == 5 || cmd_tokens[x] == 8)
-                            {
-                                redir_outfile_index = x;
-                            }
-                            x++;
-                        }
-                        char *outfile = cmd[i][redir_outfile_index];
-                        if (redir_index != 0 && redir_outfile_index != 0)
-                        {
-                            if (redir_token == 4)
-                                out_fd = open(outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-                            else if (redir_token == 7)
-                                out_fd = open(outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
-                            //printf("outfile is %s\n", cmd[0][redir_outfile_index]);
-                        }
-                        // set redir b null
-                        x = 0;
-                        while (cmd[i][x])
-                        {
-                            if (cmd_tokens[x] == 4 || cmd_tokens[x] == 7)
-                            {
-                                cmd[i][x] = NULL;
-                            }
-                            x++;
-                        }
-
-
-                
-                        if (out_fd != STDOUT)
-                        {
-                            dup2(out_fd, STDOUT);
-                        }
-                        else
-                            out_fd = STDOUT;
-                        // int h = i;
-                        // int p = 0;
-                        // while (cmd[h])
-                        // {
-                        //     while (cmd[h][p] != NULL)
-                        //     {
-                        //         printf("cmd = %s\n", cmd[h][p]);
-                        //         p++;
-                        //     }
-                        //     h++;
-                        // }
-                        piping(cmd[i], STDIN, out_fd, env, env_list, args_tokens);
-                        if (out_fd != STDOUT)
-                        {
-                            out_fd = STDOUT;
-                        }
+                        int *cmd_tokens = tokenise_cmd(cmd[i]);
+                        establish_output_stream(cmd[i], cmd_tokens, redirection);
+                        dup_output_before_piping(redirection);
+                        piping(cmd[i], STDIN, redirection->out_fd, env, env_list, args_tokens);
+                        dup_output_after_piping(redirection);
                         i++;
                     }
                     dup2(stdout_copy, STDOUT);
@@ -172,6 +104,7 @@ int main(int ac, char **av, char **env)
             num_of_cmds = count_cmds(parsed_line_args, '|');
             args_tokens = tokenise_cmd(parsed_line_args);
             cmd = get_piped_cmd_by_ptr(parsed_line_args, args_tokens);
+            // execute_only_cmd
             if (num_of_cmds == 1)
             {
                 int     *cmd_tokens;
@@ -249,7 +182,6 @@ int main(int ac, char **av, char **env)
                 }
             }
         }
-        walid++;
         line = readline(GREEN"minishell ▸ "WHITE);
     }
     return (global_exit);

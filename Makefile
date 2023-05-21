@@ -34,7 +34,7 @@ SRC = minishell \
 		builtins/cd \
 		builtins/export \
 		builtins/env \
-		execution/pipe \
+		execution/piping \
 		execution/exec_cmd \
 		execution/exec_builtins \
 		execution/open_outfile \

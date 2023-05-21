@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/21 23:15:09 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/21 23:35:29 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int main(int ac, char **av, char **env)
                     global_exit = 127;
                     exit(127);
                 }
-                //parse_cmd(s, t, env_list);
             }
             else
             {
@@ -107,78 +106,36 @@ int main(int ac, char **av, char **env)
             // execute_only_cmd
             if (num_of_cmds == 1)
             {
-                int     *cmd_tokens;
-                cmd_tokens = tokenise_cmd(cmd[0]);
-                int x = 0;
-                //int count_outfile = 0;
-                int redir_token; // fih token >, >>
-                int redir_index = 0; // fih index dyal token >, >>
-                int redir_outfile_index = 0; // fih outfile index
-                int out_fd = STDOUT;    // out file descriptor
-                while (cmd_tokens[x])
-                {
-                    if (cmd_tokens[x] == 4 || cmd_tokens[x] == 7)
-                    {
-                        redir_token = cmd_tokens[x];
-                        redir_index = x;
-                    }
-                    x++;
-                }
-                x = redir_index;
-                while (cmd_tokens[x])
-                {
-                    if (cmd_tokens[x] == 5 || cmd_tokens[x] == 8)
-                    {
-                        redir_outfile_index = x;
-                    }
-                    x++;
-                }
-                char *outfile = cmd[0][redir_outfile_index];
-                if (redir_index != 0 && redir_outfile_index != 0)
-                {
-                    if (redir_token == 4)
-                        out_fd = open(outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-                    else if (redir_token == 7)
-                        out_fd = open(outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
-                    //printf("outfile is %s\n", cmd[0][redir_outfile_index]);
-                }
-                // set redir b null
-                x = 0;
-                while (cmd[0][x])
-                {
-                    if (cmd_tokens[x] == 4 || cmd_tokens[x] == 7)
-                    {
-                        cmd[0][x] = NULL;
-                    }
-                    x++;
-                }
-                    
+
+                /*
+                dup_output_before_piping(redirection);
+                piping(cmd[i], STDIN, redirection->out_fd, env, env_list, args_tokens);
+                dup_output_after_piping(redirection);
+                */
+                int *cmd_tokens = tokenise_cmd(cmd[0]);
+                establish_output_stream(cmd[0], cmd_tokens, redirection);
                 if (is_builtins(cmd[0][0]) == 1)
                 {
                     int ps = fork();
                     if (ps == 0)
                     {
-                        dup2(out_fd, STDOUT);
+                        dup2(redirection->out_fd, STDOUT);
                         exec_builtins(cmd[0], args_tokens, env_list); // kayb9a mhangi ila ma exsitach process
                         exit(0); // handle exit f builtins // 
                     }
                     else if (ps > 0)
-                    {
                         wait(&ps);
-                    }
                 }
                 else
                 {
                     int ps = fork();
                     if (ps == 0)
                     {
-                        dup2(out_fd, STDOUT);
+                        dup2(redirection->out_fd, STDOUT);
                         exec_cmd(cmd[0], env);
                     }
                     else if (ps > 0)
-                    {
                         wait(&ps);
-                    }
                 }
             }
         }

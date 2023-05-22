@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/21 22:42:33 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:33:19 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ typedef struct s_env
 	struct s_env 	*prev;
 }               t_env;
 
+typedef	struct	s_cmd_data
+{
+	char	**parsed_line_args;
+	int		num_of_cmds;
+	int		*args_tokens;
+	char	***cmd;
+	int		stdout_copy;
+	int		stdin_copy;
+	int		i;
+} t_cmd_data;
 
 typedef struct s_redirection
 {
@@ -60,7 +70,19 @@ typedef struct s_redirection
 	char	*outfile;
 }	t_redirection;
 
-
+/*
+void	init_cmd_data(t_cmd_data *cmd_data)
+{
+	line = parse_operator(line);
+	cmd_data->parsed_line_args = args_split(line);
+	cmd_data->num_of_cmds = count_cmds(parsed_line_args, '|');;
+	cmd_data->args_tokens = tokenise_cmd(parsed_line_args);;
+	cmd_data->cmd = get_piped_cmd_by_ptr(parsed_line_args, args_tokens);
+	cmd_data->stdout_copy = dup(STDOUT);;
+	cmd_data->stdin_copy = dup(STDIN);
+	cmd_data->i = 0;
+	(void)cmd_data->stdin_copy;
+} */
 
 extern int global_exit;
 
@@ -169,5 +191,8 @@ void	establish_output_stream(char **cmd, int *cmd_tokens, t_redirection *redirec
 
 void	dup_output_before_piping(t_redirection *redirection);
 void	dup_output_after_piping(t_redirection *redirection);
+
+void    check_argc(int ac);
+void    cmd_not_found(char *cmd, int *global_exit);
 
 #endif

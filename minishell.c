@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/21 23:35:29 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:33:09 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,13 @@ int global_exit;
 
 int main(int ac, char **av, char **env)
 {
-    (void)ac;
     (void)av;
     char    *line;
     t_env   *env_list;
-    if (ac > 1)
-    {
-        ft_putstr_fd("Error: too many arguments\n", 2);
-        return (127);
-    }
+    check_argc(ac);
     env_list = create_env_list(env);
-    //redirection = init_redirections();
-    t_redirection *redirection = malloc(sizeof(t_redirection));
+    t_redirection *redirection;
+    redirection = malloc(sizeof(t_redirection));
 
     line = readline(GREEN"minishell ▸ "WHITE);
     //global_exit = 0;
@@ -48,13 +43,11 @@ int main(int ac, char **av, char **env)
             }
             else if (pid == 0)
             {
-                (void)env_list;
                 char **parsed_line_args;
                 int num_of_cmds;
                 int *args_tokens;
                 char ***cmd;
                 int i;
-                //int out_fd = STDOUT;
                 int stdout_copy = dup(STDOUT);
                 int stdin_copy = dup(STDIN);
                 (void)stdin_copy;
@@ -72,7 +65,7 @@ int main(int ac, char **av, char **env)
                     while (i < num_of_cmds - 1)
                     {
                         int *cmd_tokens = tokenise_cmd(cmd[i]);
-                        establish_output_stream(cmd[i], cmd_tokens, redirection);
+                        establish_output_stream(cmd[i], cmd_tokens, redirection); // init output stream + duping
                         dup_output_before_piping(redirection);
                         piping(cmd[i], STDIN, redirection->out_fd, env, env_list, args_tokens);
                         dup_output_after_piping(redirection);
@@ -80,11 +73,7 @@ int main(int ac, char **av, char **env)
                     }
                     dup2(stdout_copy, STDOUT);
                     exec_cmd(cmd[i], env);
-                    ft_putstr_fd("minishell: ", 2);
-                    ft_putstr_fd(cmd[i][0], 2);
-                    ft_putstr_fd(": command not found\n", 2);
-                    global_exit = 127;
-                    exit(127);
+                    cmd_not_found(cmd[i][0], &global_exit);
                 }
             }
             else
@@ -116,26 +105,26 @@ int main(int ac, char **av, char **env)
                 establish_output_stream(cmd[0], cmd_tokens, redirection);
                 if (is_builtins(cmd[0][0]) == 1)
                 {
-                    int ps = fork();
-                    if (ps == 0)
+                    int pid = fork();
+                    if (pid == 0)
                     {
                         dup2(redirection->out_fd, STDOUT);
                         exec_builtins(cmd[0], args_tokens, env_list); // kayb9a mhangi ila ma exsitach process
                         exit(0); // handle exit f builtins // 
                     }
-                    else if (ps > 0)
-                        wait(&ps);
+                    else if (pid > 0)
+                        wait(&pid);
                 }
                 else
                 {
-                    int ps = fork();
-                    if (ps == 0)
+                    int pid = fork();
+                    if (pid == 0)
                     {
                         dup2(redirection->out_fd, STDOUT);
                         exec_cmd(cmd[0], env);
                     }
-                    else if (ps > 0)
-                        wait(&ps);
+                    else if (pid > 0)
+                        wait(&pid);
                 }
             }
         }

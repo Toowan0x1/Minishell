@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/22 22:33:19 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/23 01:27:26 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ typedef	struct	s_cmd_data
 	int		num_of_cmds;
 	int		*args_tokens;
 	char	***cmd;
+	int		*cmd_tokens;
 	int		stdout_copy;
 	int		stdin_copy;
-	int		i;
+	int		i; // remove
 } t_cmd_data;
 
 typedef struct s_redirection
@@ -70,19 +71,8 @@ typedef struct s_redirection
 	char	*outfile;
 }	t_redirection;
 
-/*
-void	init_cmd_data(t_cmd_data *cmd_data)
-{
-	line = parse_operator(line);
-	cmd_data->parsed_line_args = args_split(line);
-	cmd_data->num_of_cmds = count_cmds(parsed_line_args, '|');;
-	cmd_data->args_tokens = tokenise_cmd(parsed_line_args);;
-	cmd_data->cmd = get_piped_cmd_by_ptr(parsed_line_args, args_tokens);
-	cmd_data->stdout_copy = dup(STDOUT);;
-	cmd_data->stdin_copy = dup(STDIN);
-	cmd_data->i = 0;
-	(void)cmd_data->stdin_copy;
-} */
+
+
 
 extern int global_exit;
 
@@ -195,4 +185,16 @@ void	dup_output_after_piping(t_redirection *redirection);
 void    check_argc(int ac);
 void    cmd_not_found(char *cmd, int *global_exit);
 
+void    init_cmd_data(t_cmd_data *cmd_data, char *line);
+
+
+void	check_fork_fail(pid_t *pid);
+
+void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
+
 #endif
+
+// multi_pipes_execution
+// last_pipe_execution
+
+// single_cmd_execution

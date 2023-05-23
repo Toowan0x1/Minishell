@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/23 04:23:57 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/23 22:48:32 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,19 @@ typedef	struct	s_cmd_data
 
 typedef struct s_redirection
 {
-	int		redirection_token;
-	int		redirection_index;
+	// input redirection vars
+	int		in_redirection_token;
+	int		in_redirection_index;
+	int		infile_index;
+	int		in_fd;
+	char	*infile;
+	//	output redirection vars
+	int		out_redirection_token;
+	int		out_redirection_index;
 	int		outfile_index;
 	int		out_fd;
 	char	*outfile;
 }	t_redirection;
-
-
 
 
 extern int global_exit;
@@ -160,10 +165,18 @@ int		count_cmds(char **cmd, char c);
 
 
 
-void	set_redirect_to_null(char **cmd, int *cmd_tokens);
-int		get_redirection_index(int *cmd_tokens, t_redirection *redirection);
+void	set_input_redirect_to_null(char **cmd, int *cmd_tokens);
+int		get_input_redirection_index(int *cmd_tokens, t_redirection *redirection);
+int		get_infile_index(int *cmd_tokens, int index);
+void	establish_input_stream(char **cmd, int *cmd_tokens, t_redirection *redirection);
+
+void	set_output_redirect_to_null(char **cmd, int *cmd_tokens);
+int		get_output_redirection_index(int *cmd_tokens, t_redirection *redirection);
 int		get_outfile_index(int *cmd_tokens, int index);
 void	establish_output_stream(char **cmd, int *cmd_tokens, t_redirection *redirection);
+
+void	dup_input_before_piping(t_redirection *redirection);
+void	dup_input_after_piping(t_redirection *redirection);
 
 void	dup_output_before_piping(t_redirection *redirection);
 void	dup_output_after_piping(t_redirection *redirection);

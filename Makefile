@@ -60,7 +60,9 @@ SRC = minishell \
 		execution/exec_cmd \
 		execution/exec_builtins \
 		execution/open_outfile \
+		execution/open_infile \
 		execution/dup_out \
+		execution/dup_in \
 		error_manage/args_error \
 		error_manage/cmd_not_found \
 		error_manage/fork_error \

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/23 01:46:26 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/23 02:39:58 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int global_exit;
 
 int main(int ac, char **av, char **env)
 {
+    // initiate_values(T_DATA);
     (void)av;
     char            *line;
     t_env           *env_list;
@@ -33,25 +34,9 @@ int main(int ac, char **av, char **env)
         if (line)
             add_history(line);
         else
-            return (0);
+            return (0); // handle signals here
         if (parse(line))
-        {
-            pid_t pid = fork();
-            check_fork_fail(&pid);
-            init_cmd_data(cmd_data, line);
-            if (pid == 0)
-            {
-                if (cmd_data->num_of_cmds > 1)
-                    multi_pipes_execution(cmd_data, redirection, env, env_list);
-                if (cmd_data->num_of_cmds == 1)
-                    single_cmd_execution(cmd_data, redirection, env, env_list);
-            }
-            else
-            {
-                int status;
-                waitpid(pid, &status, 0);
-            }
-        }
+            execute(line, cmd_data, redirection, env, env_list);
         line = readline(GREEN"minishell ▸ "WHITE);
     }
     return (global_exit);

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/23 02:39:13 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/23 03:54:12 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,21 +156,6 @@ void    set_env(char *env_name, char *env_value, t_env *env_list);
 
 char	***get_piped_cmd_by_ptr(char **cmds, int *tokens);
 int		count_cmds(char **cmd, char c);
-
-
-// typedef	struct s_global_vars
-// {
-// 	char	**parsed_line_args;
-// 	int		num_of_cmds;
-//     int		*args_tokens;
-//     char	***cmd;
-//     int		i;
-//     int		out_fd;
-//     int		stdout_copy;
-//     int		stdin_copy;
-// }	t_var; // cmd_exec_vars
-
-
 
 
 

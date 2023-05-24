@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/25 00:12:04 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:25:04 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,77 +28,9 @@ void	init_cmd_data(t_cmd_data *cmd_data, char *line)
 	(void)cmd_data->stdin_copy;
 }
 
-int main(int ac, char **av, char **env)
+void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list)
 {
-    // initiate_values(T_DATA);
-    char            *line;
-    t_env           *env_list;
-    t_redirection   *redirection;
-    t_cmd_data      *cmd_data;
-    
-    (void)av;
-    check_argc(ac);
-    global_exit = 0;
-    env_list = create_env_list(env);
-    redirection = malloc(sizeof(t_redirection));
-    cmd_data = malloc(sizeof(t_cmd_data));
-    line = readline(GREEN"minishell ▸ "WHITE);
-    while (1)
-    {
-        if (line)
-            add_history(line);
-        else
-            write(1, "\n", 1);
-        if (parse(line))
-        {
-            pid_t pid;
-            
-            pid = fork();
-            check_fork_fail(&pid);
-            // execute_multi_cmds();
-            init_cmd_data(cmd_data, line);
-            expand(cmd_data->parsed_line_args, cmd_data->args_tokens, env_list);
-            delete_quoate(cmd_data->parsed_line_args);
-            if (pid == 0)
-            {
-                int i = 0;
-                if (cmd_data->num_of_cmds > 1)
-                {
-                    while (i < cmd_data->num_of_cmds - 1)
-                    {
-                        int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
-                        establish_output_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
-                    	establish_input_stream(cmd_data->cmd[i], cmd_tokens, redirection);
-                    	dup_output_before_piping(redirection);
-		                dup_input_before_piping(redirection);
-                        piping(cmd_data->cmd[i], STDIN, redirection->out_fd, env, env_list, cmd_data->args_tokens);
-                        dup_output_after_piping(redirection);
-                        i++;
-                    }
-                    int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
-                    establish_output_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
-                    establish_input_stream(cmd_data->cmd[i], cmd_tokens, redirection);
-                    if (redirection->out_redirection_token == 0)
-                        redirection->out_fd = cmd_data->stdout_copy;
-                    else
-                        redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
-                    dup_output_before_piping(redirection);
-		            dup_input_before_piping(redirection);
-                    exec_cmd(cmd_data->cmd[i], env);
-                    cmd_not_found(cmd_data->cmd[i][0], &global_exit);
-                }
-            }
-            else
-            {
-                int status;
-                waitpid(pid, &status, 0);
-                // Handle child process exit status if needed
-            }
-            // parent process affection here 
-            // execute_only_cmd
-            if (cmd_data->num_of_cmds == 1)
-            {
-                int *cmd_tokens = tokenise_cmd(cmd_data->cmd[0]);
+    int *cmd_tokens = tokenise_cmd(cmd_data->cmd[0]);
                 establish_output_stream(cmd_data->cmd[0], cmd_tokens, redirection);
                 establish_input_stream(cmd_data->cmd[0], cmd_tokens, redirection);
                 if (is_builtins(cmd_data->cmd[0][0]) == 1)
@@ -125,7 +57,82 @@ int main(int ac, char **av, char **env)
                     else if (pid > 0)
                         wait(&pid);
                 }
+}
+
+int main(int ac, char **av, char **env)
+{
+    // initiate_values(T_DATA);
+    char            *line;
+    t_env           *env_list;
+    t_redirection   *redirection;
+    t_cmd_data      *cmd_data;
+    
+    (void)av;
+    check_argc(ac);
+    global_exit = 0;
+    env_list = create_env_list(env);
+    redirection = malloc(sizeof(t_redirection));
+    cmd_data = malloc(sizeof(t_cmd_data));
+    line = readline(GREEN"minishell ▸ "WHITE);
+    while (1)
+    {
+        if (line)
+            add_history(line);
+        else
+            write(1, "\n", 1);
+        if (parse(line))
+        {
+            
+            
+            // execute_multi_cmds();
+            init_cmd_data(cmd_data, line);
+            expand(cmd_data->parsed_line_args, cmd_data->args_tokens, env_list);
+            delete_quoate(cmd_data->parsed_line_args);
+            
+
+            if (cmd_data->num_of_cmds > 1)
+            {
+                pid_t pid;
+            
+            pid = fork();
+            check_fork_fail(&pid);
+                if (pid == 0)
+            {
+                int i = 0;
+                while (i < cmd_data->num_of_cmds - 1)
+                {
+                    int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
+                    establish_output_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
+                	establish_input_stream(cmd_data->cmd[i], cmd_tokens, redirection);
+                	dup_output_before_piping(redirection);
+	                dup_input_before_piping(redirection);
+                    piping(cmd_data->cmd[i], STDIN, redirection->out_fd, env, env_list, cmd_data->args_tokens);
+                    dup_output_after_piping(redirection);
+                    i++;
+                }
+                int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
+                establish_output_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
+                establish_input_stream(cmd_data->cmd[i], cmd_tokens, redirection);
+                if (redirection->out_redirection_token == 0)
+                        redirection->out_fd = cmd_data->stdout_copy;
+                else
+                    redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
+                dup_output_before_piping(redirection);
+	            dup_input_before_piping(redirection);
+                exec_cmd(cmd_data->cmd[i], env);
+                cmd_not_found(cmd_data->cmd[i][0], &global_exit);
             }
+            else
+            {
+                int status;
+                waitpid(pid, &status, 0);
+                // Handle child process exit status if needed
+            }
+            }
+
+            
+            if (cmd_data->num_of_cmds == 1)
+                single_cmd_execution1(cmd_data, redirection, env, env_list);
         }
         line = readline(GREEN"minishell ▸ "WHITE);
     }
@@ -133,3 +140,5 @@ int main(int ac, char **av, char **env)
 }
 
 // pwd makadirch exit
+
+

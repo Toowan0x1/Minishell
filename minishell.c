@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/24 23:46:27 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:12:04 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int main(int ac, char **av, char **env)
             
             pid = fork();
             check_fork_fail(&pid);
+            // execute_multi_cmds();
             init_cmd_data(cmd_data, line);
             expand(cmd_data->parsed_line_args, cmd_data->args_tokens, env_list);
             delete_quoate(cmd_data->parsed_line_args);
             if (pid == 0)
             {
-                // execute_multi_cmds()
                 int i = 0;
                 if (cmd_data->num_of_cmds > 1)
                 {
@@ -98,16 +98,9 @@ int main(int ac, char **av, char **env)
             // execute_only_cmd
             if (cmd_data->num_of_cmds == 1)
             {
-                /*
-                dup_output_before_piping(redirection);
-                piping(cmd[i], STDIN, redirection->out_fd, env, env_list, args_tokens);
-                dup_output_after_piping(redirection);
-                */
                 int *cmd_tokens = tokenise_cmd(cmd_data->cmd[0]);
                 establish_output_stream(cmd_data->cmd[0], cmd_tokens, redirection);
-                /*******/
                 establish_input_stream(cmd_data->cmd[0], cmd_tokens, redirection);
-                /*******/
                 if (is_builtins(cmd_data->cmd[0][0]) == 1)
                 {
                     int pid = fork();

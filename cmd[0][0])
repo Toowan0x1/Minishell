@@ -1,0 +1,8 @@
+[0;32mminishell ▸ [0m                {
+[0;32mminishell ▸ [0m                    int pid = fork();
+[0;32mminishell ▸ [0m                    if (pid == 0)
+[0;32mminishell ▸ [0m                    {
+[0;32mminishell ▸ [0m                        dup2(redirection->out_fd, STDOUT);
+[0;32mminishell ▸ [0m                        exec_builtins(cmd_data->cmd[0], cmd_data->args_tokens, env_list); // kayb9a mhangi ila ma exsitach process
+[0;32mminishell ▸ [0m                    }
+[0;32mminishell ▸ [0m                    else if (pid > 0)

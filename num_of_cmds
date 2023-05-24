@@ -1,0 +1,11 @@
+[0;32mminishell ▸ [0m            {
+[0;32mminishell ▸ [0m                /*
+[0;32mminishell ▸ [0m                dup_output_before_piping(redirection);
+[0;32mminishell ▸ [0m                piping(cmd[i], STDIN, redirection->out_fd, env, env_list, args_tokens);
+[0;32mminishell ▸ [0m                dup_output_after_piping(redirection);
+[0;32mminishell ▸ [0m                */
+[0;32mminishell ▸ [0m                int *cmd_tokens = tokenise_cmd(cmd_data->cmd[0]);
+[0;32mminishell ▸ [0m                establish_output_stream(cmd_data->cmd[0], cmd_tokens, redirection);
+[0;32mminishell ▸ [0m                /****/
+[0;32mminishell ▸ [0m                    establish_input_stream(cmd_data->cmd[0], cmd_tokens, redirection);
+[0;32mminishell ▸ [0m                    if (redirection->out_redirection_token == 0)

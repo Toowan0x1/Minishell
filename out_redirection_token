@@ -1,0 +1,11 @@
+[0;32mminishell ▸ [0m                        redirection->out_fd = cmd_data->stdout_copy;
+[0;32mminishell ▸ [0m                    else
+[0;32mminishell ▸ [0m                        redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
+[0;32mminishell ▸ [0m                    dup_output_before_piping(redirection);
+[0;32mminishell ▸ [0m
+.git/                  builtins/              error_manage/          libft/                 minishell.h            out_redirection_token
+.minishell.c.swp       cat                    execution/             libft.a                minishell.o            parsing/
+Makefile               env_manage.c           helpers/               minishell              num_of_cmds            readline/
+README.md              environment/           here                   minishell.c            oldmakefile            tests
+[0;32mminishell ▸ [0m            dup_input_before_piping(redirection);
+[0;32mminishell ▸ [0m                if (is_builtins(cmd_data->cmd[0][0]) == 1)

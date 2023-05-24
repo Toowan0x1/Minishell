@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/24 22:39:19 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 23:30:13 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ void    set_env(char *env_name, char *env_value, t_env *env_list);
 
 char	***get_piped_cmd_by_ptr(char **cmds, int *tokens);
 int		count_cmds(char **cmd, char c);
+
+void	check_fork_fail(pid_t *pid);
 
 
 // typedef	struct s_global_vars

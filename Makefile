@@ -64,6 +64,7 @@ SRC = minishell \
 		execution/dup_in \
 		error_manage/args_error \
 		error_manage/cmd_not_found \
+		error_manage/fork_error \
 
 OBJ = $(SRC:=.o)
 

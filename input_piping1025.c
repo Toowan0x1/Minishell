@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   piping1025.c                                       :+:      :+:    :+:   */
+/*   input_piping1025.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/23 23:25:59 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 03:18:59 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int     main(void)
         }
         // ila bghit nredirecti flakher lchi outfile dup2(open("out.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644), STDOUT);
         dup2(stdout_copy, STDOUT);
-        dup2(open("minishell.c", O_RDONLY), STDIN);
+        int infile  = open("minishell.c", O_RDONLY);
+        dup2(infile, STDIN);
         execvp(cmd[i][0], cmd[i]);
         return (0);
 }

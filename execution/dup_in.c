@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 21:48:38 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/23 22:27:54 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 06:11:00 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ void    dup_input_before_piping(t_redirection *redirection)
 void    dup_input_after_piping(t_redirection *redirection)
 {
         if (redirection->in_fd != STDIN)
+        {
                 redirection->in_fd = STDIN;
+        }
 }

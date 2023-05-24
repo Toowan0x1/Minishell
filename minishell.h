@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/23 22:48:32 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 05:54:28 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ typedef struct s_redirection
 	int		outfile_index;
 	int		out_fd;
 	char	*outfile;
+
+	int		stdin_copy;
+	int		stdout_copy;
 }	t_redirection;
 
 

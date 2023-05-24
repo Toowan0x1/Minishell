@@ -33,6 +33,7 @@ int	main(void)
 	{
 		{"ls", "-l", NULL},
 		{"pwd", NULL},
+		{"cat", "infile", NULL, "outfile", NULL},
 		{"ls", "-la", NULL},
 		{"cat", NULL},
 		{"cat", NULL},

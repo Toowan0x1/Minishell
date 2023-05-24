@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 22:01:41 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/24 00:01:51 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 07:01:02 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,23 @@ void    establish_input_stream(char **cmd, int *cmd_tokens, t_redirection *redir
         redirection->in_redirection_token = 0;
         redirection->in_redirection_index = -2;
         redirection->infile_index = -2;
-        //redirection->infile = 
+        redirection->infile = NULL;
         redirection->in_fd = STDIN;
+
+        redirection->stdin_copy = STDIN;
+	redirection->stdout_copy = STDOUT;
 
         redirection->in_redirection_index = get_input_redirection_index(cmd_tokens, redirection);
         //redirection->infile_index = get_infile_index(cmd_tokens, redirection->in_redirection_index);
-        redirection->infile_index = redirection->in_redirection_index + 1;
-        redirection->infile = cmd[redirection->infile_index];
-        printf("\ninfile=%s\n", redirection->infile);
+                redirection->infile_index = redirection->in_redirection_index + 1;
+                redirection->infile = cmd[redirection->infile_index];
         if (redirection->in_redirection_index != -2 && redirection->infile_index != -2)   ///// -2 !
         {
+                // ndkhel lines .. ldakhl
                 if (redirection->in_redirection_token == 3)
+                {
                         redirection->in_fd = open(redirection->infile, O_RDONLY);
+                }
                 if (redirection->in_fd == -1)
                 {
                         ft_putstr_fd("minishell: ", 2);
@@ -79,9 +84,13 @@ void    establish_input_stream(char **cmd, int *cmd_tokens, t_redirection *redir
                         exit(1);
                 }
        }
-        //set_input_redirect_to_null(cmd, cmd_tokens);
-       if (redirection->infile != NULL)
-         cmd[0] = cmd[2];
+        set_input_redirect_to_null(cmd, cmd_tokens);
+       if (redirection->infile != NULL && redirection->in_redirection_token == 3)
+       { cmd[0] = NULL;
+        cmd[1] = NULL; 
+        cmd[0] = cmd[2];
+        printf("===== \n");
+        }
 }
 
 // pwd | < minishell.c cat | wc
@@ -93,3 +102,8 @@ void    establish_input_stream(char **cmd, int *cmd_tokens, t_redirection *redir
 // ila kan chi arg mora cmd kanmchi nchof wach howa file and wach it exist ila ah kanrj3o howa li infile
 
 // < file1 cat file2 file1
+
+// if infile and i == 0
+
+// pwd | < makefile catdf | head
+// 

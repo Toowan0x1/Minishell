@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 21:47:13 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/23 22:44:04 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 07:38:55 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		get_output_redirection_index(int *cmd_tokens, t_redirection *redirection)
     {
         if (cmd_tokens[i] == 4 || cmd_tokens[i] == 7)
         {
-            redirection->in_redirection_token = cmd_tokens[i];
+            redirection->out_redirection_token = cmd_tokens[i];
 			return (i);
         }
         i++;
@@ -57,25 +57,29 @@ int		get_outfile_index(int *cmd_tokens, int index)
 
 void	establish_output_stream(char **cmd, int *cmd_tokens, t_redirection *redirection)
 {
-	redirection->in_redirection_token = 0;
-	redirection->in_redirection_index = 0;
+	redirection->out_redirection_token = 0;
+	redirection->out_redirection_index = 0;
 	redirection->outfile_index = 0;
-	//redirection->outfile = 
+	redirection->outfile = NULL;
 	redirection->out_fd = STDOUT;
+	
+	redirection->stdin_copy = STDIN;
+	redirection->stdout_copy = STDOUT;
 
-	redirection->in_redirection_index = get_output_redirection_index(cmd_tokens, redirection);
-	redirection->outfile_index = get_outfile_index(cmd_tokens, redirection->in_redirection_index);
+	redirection->out_redirection_index = get_output_redirection_index(cmd_tokens, redirection);
+	redirection->outfile_index = get_outfile_index(cmd_tokens, redirection->out_redirection_index);
 	redirection->outfile = cmd[redirection->outfile_index];
-	if (redirection->in_redirection_index != 0 && redirection->outfile_index != 0)
+	if (redirection->out_redirection_index != 0 && redirection->outfile_index != 0)
 	{
-		if (redirection->in_redirection_token == 4)
+		if (redirection->out_redirection_token == 4)
 			redirection->out_fd = open(redirection->outfile, O_TRUNC | O_WRONLY | O_CREAT, 0644);
-		else if (redirection->in_redirection_token == 7)
+		else if (redirection->out_redirection_token == 7)
 			redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
 		if (redirection->out_fd == -1)
     	{
-        	perror("Error opening output file");
-        	exit(1);
+        	ft_putstr_fd("minishell: ", 2);
+            perror(redirection->infile); // no such file or dir ????????
+            exit(1);
     	}
 	}
 	set_output_redirect_to_null(cmd, cmd_tokens); // set output token to null

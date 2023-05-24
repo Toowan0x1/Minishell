@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/24 09:59:35 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:31:59 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int main(int ac, char **av, char **env)
                         establish_output_stream(cmd[i], cmd_tokens, redirection); // init output stream + duping
                     	establish_input_stream(cmd[i], cmd_tokens, redirection);
                     	dup_output_before_piping(redirection);
-		        dup_input_before_piping(redirection);
+		                dup_input_before_piping(redirection);
                         piping(cmd[i], STDIN, redirection->out_fd, env, env_list, args_tokens);
                         dup_output_after_piping(redirection);
                         i++;
@@ -76,9 +76,14 @@ int main(int ac, char **av, char **env)
                     int *cmd_tokens = tokenise_cmd(cmd[i]);
                     establish_output_stream(cmd[i], cmd_tokens, redirection); // init output stream + duping
                     establish_input_stream(cmd[i], cmd_tokens, redirection);
-		    redirection->out_fd = stdout_copy;
+                    //printf("redir token = %d\n", redirection->out_redirection_token);
+                    //printf("redir file = %s\n", redirection->outfile);
+                    if (redirection->out_redirection_token == 0)
+                        redirection->out_fd = stdout_copy;
+                    else
+                        redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
                     dup_output_before_piping(redirection);
-		    dup_input_before_piping(redirection);
+		            dup_input_before_piping(redirection);
                     //dup2(redirection->out_fd, STDOUT);
                     //dup2(redirection->in_fd, STDIN);
                     exec_cmd(cmd[i], env);

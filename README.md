@@ -66,12 +66,14 @@ Contributions to the Minishell project are welcome. If you find any issues or ha
 
 ## Contributing 
 
-**Executor:**
+**Executor:**<br/>
+<img src="[path/to/image.jpg](https://cdn.intra.42.fr/users/e1135c041804efcda5fe167ee06f8e27/wbouwach.JPG)" alt="oel-houm Text" width="300" height="auto" style="max-width: 100%;">
 [Omar El Houmadi](https://github.com/toowan0x1)
 <br/>
 &emsp;42 intra profile : [oel-houm](https://profile.intra.42.fr/users/oel-houm)
 <br/>
-**Parser:**
+**Parser:**<br/>
+<img src="[path/to/image.jpg](https://cdn.intra.42.fr/users/e1135c041804efcda5fe167ee06f8e27/wbouwach.JPG)" alt="oel-houm Text" width="300" height="auto" style="max-width: 100%;">
 [Walid Bouwachma](https://github.com/bwalidd)<br/>
 &emsp;42 intra profile : [wbouwach](https://profile.intra.42.fr/users/wbouwach) <br/>
 <br/>

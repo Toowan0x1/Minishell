@@ -66,10 +66,12 @@ Contributions to the Minishell project are welcome. If you find any issues or ha
 
 ## Contributing 
 
-**Executor** [Omar El Houmadi](https://github.com/toowan0x1)
+**Executor:**
+[Omar El Houmadi](https://github.com/toowan0x1)
 <br/>
 &emsp;42 intra profile : [oel-houm](https://profile.intra.42.fr/users/oel-houm)
 <br/>
-**Parser** [Walid Bouwachma](https://github.com/bwalidd)<br/>
+**Parser:**
+[Walid Bouwachma](https://github.com/bwalidd)<br/>
 &emsp;42 intra profile : [wbouwach](https://profile.intra.42.fr/users/wbouwach) <br/>
 <br/>

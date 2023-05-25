@@ -1,3 +1,4 @@
+
 #  Minishell
 
 Minishell is a project developed as part of the 42 curriculum. It aims to create a simplified shell that can interpret and execute basic commands, handle environment variables, and implement some built-in functionalities.
@@ -67,13 +68,14 @@ Contributions to the Minishell project are welcome. If you find any issues or ha
 ## Contributing 
 
 **Executor:**<br/>
-<img src="https://github.com/Toowan0x1/Minishell/raw/master/oel-houm.jpeg" alt="oel-houm" width="300" height="auto">
+<img src="https://github.com/Toowan0x1/Minishell/raw/master/oel-houm.jpeg" alt="oel-houm" width="170" height="auto">
 [Omar El Houmadi](https://github.com/toowan0x1)
 <br/>
 &emsp;42 intra profile : [oel-houm](https://profile.intra.42.fr/users/oel-houm)
 <br/>
 **Parser:**<br/>
-<img src="https://github.com/Toowan0x1/Minishell/raw/master/wbouwach.jpeg" alt="wbouwach" width="300" height="auto">
+<img src="https://github.com/Toowan0x1/Minishell/raw/master/wbouwach.jpeg" alt="wbouwach" width="170" height="auto">
 [Walid Bouwachma](https://github.com/bwalidd)<br/>
 &emsp;42 intra profile : [wbouwach](https://profile.intra.42.fr/users/wbouwach) <br/>
 <br/>
+<img src="https://github.com/Toowan0x1/Minishell/raw/master/wbouwach.jpeg" alt="oel-houm" style="width: 100px; height: 100px; border-radius: 50%;">

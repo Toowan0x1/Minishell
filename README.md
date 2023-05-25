@@ -79,3 +79,11 @@ Contributions to the Minishell project are welcome. If you find any issues or ha
 &emsp;42 intra profile : [wbouwach](https://profile.intra.42.fr/users/wbouwach) <br/>
 <br/>
 <img src="https://github.com/Toowan0x1/Minishell/raw/master/wbouwach.jpeg" alt="oel-houm" style="width: 100px; height: 100px; border-radius: 50%;">
+
+
+
+| <img src="https://github.com/Toowan0x1/Minishell/raw/master/oel-houm.jpeg" alt="oel-houm" width="170" height="auto"> | <img src="https://github.com/Toowan0x1/Minishell/raw/master/wbouwach.jpeg" alt="wbouwach" width="170" height="auto"> |
+| ------ | ------ |
+| Executer | Parser |
+| &emsp;42 intra profile : [oel-houm](https://profile.intra.42.fr/users/oel-houm) | &emsp;42 intra profile : [oel-houm](https://profile.intra.42.fr/users/oel-houm) |
+| &emsp;github : (https://github.com/toowan0x1) | &emsp;github : (https://github.com/bwalidd) |

@@ -67,6 +67,8 @@ SRC = minishell \
 		error_manage/fork_error \
 		execution/multi_pipes_execution \
 		execution/single_cmd_execution \
+		execution/execute_line \
+		execution/init_shell_data \
 
 OBJ = $(SRC:=.o)
 

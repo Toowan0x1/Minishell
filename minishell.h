@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/25 00:07:49 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/25 01:47:19 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void     exec_builtins(char **cmd, int *tokens, t_env *env_list);
 int     is_builtins(char *cmd);
 void    exec_cmd(char **cmd_args, char **env);
 
-void	multi_pipes_execution(pid_t *pid, t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
+void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
 
 char    *get_env_value(char *env_var, t_env *env_list);
 int		find_env(char *env, t_env *env_list);
@@ -210,5 +210,12 @@ void	dup_output_after_piping(t_redirection *redirection);
 
 void    check_argc(int ac);
 void    cmd_not_found(char *cmd, int *global_exit);
+
+
+
+
+void    establish_io_stream(char **cmd, int *cmd_tokens, t_redirection *redirection);
+void    dup_io_before_piping(t_redirection *redirection);
+
 
 #endif

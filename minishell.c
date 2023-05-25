@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/25 00:25:04 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/25 01:46:36 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,55 +82,14 @@ int main(int ac, char **av, char **env)
             write(1, "\n", 1);
         if (parse(line))
         {
-            
-            
             // execute_multi_cmds();
             init_cmd_data(cmd_data, line);
             expand(cmd_data->parsed_line_args, cmd_data->args_tokens, env_list);
             delete_quoate(cmd_data->parsed_line_args);
-            
-
             if (cmd_data->num_of_cmds > 1)
             {
-                pid_t pid;
-            
-            pid = fork();
-            check_fork_fail(&pid);
-                if (pid == 0)
-            {
-                int i = 0;
-                while (i < cmd_data->num_of_cmds - 1)
-                {
-                    int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
-                    establish_output_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
-                	establish_input_stream(cmd_data->cmd[i], cmd_tokens, redirection);
-                	dup_output_before_piping(redirection);
-	                dup_input_before_piping(redirection);
-                    piping(cmd_data->cmd[i], STDIN, redirection->out_fd, env, env_list, cmd_data->args_tokens);
-                    dup_output_after_piping(redirection);
-                    i++;
-                }
-                int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
-                establish_output_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
-                establish_input_stream(cmd_data->cmd[i], cmd_tokens, redirection);
-                if (redirection->out_redirection_token == 0)
-                        redirection->out_fd = cmd_data->stdout_copy;
-                else
-                    redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
-                dup_output_before_piping(redirection);
-	            dup_input_before_piping(redirection);
-                exec_cmd(cmd_data->cmd[i], env);
-                cmd_not_found(cmd_data->cmd[i][0], &global_exit);
+                multi_pipes_execution(cmd_data, redirection, env, env_list);
             }
-            else
-            {
-                int status;
-                waitpid(pid, &status, 0);
-                // Handle child process exit status if needed
-            }
-            }
-
-            
             if (cmd_data->num_of_cmds == 1)
                 single_cmd_execution1(cmd_data, redirection, env, env_list);
         }

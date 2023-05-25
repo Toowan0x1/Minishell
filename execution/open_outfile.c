@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 21:47:13 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/24 08:02:20 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/25 02:42:27 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void    establish_input_stream(char **cmd, int *cmd_tokens, t_redirection *redir
        { cmd[0] = NULL;
         cmd[1] = NULL; 
         cmd[0] = cmd[2];
-        printf("===== \n");
         }
 }
 

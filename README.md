@@ -1,20 +1,12 @@
 #  Minishell
 
-The existence of shells is linked to the very existence of IT. At the time, all coders agreed
-that communicating with a computer using aligned 1/0 switches was seriously
-irritating. It was only logical that they came up with the idea to communicate with
-a computer using interactive lines of commands in a language somewhat close
-to english.The objective of this project is to create a simple shell using c.
-
-![Alt Text](https://cdn.outdoorhub.com/wp-content/uploads/sites/2/2015/12/outdoorhub--2015-12-02_00-01-38.jpg)
-
 Minishell is a project developed as part of the 42 curriculum. It aims to create a simplified shell that can interpret and execute basic commands, handle environment variables, and implement some built-in functionalities.
 
 Installation
 To install and run the Minishell project, follow these steps:
 
 Clone the repository:
-'git clone https://github.com/your-username/minishell.git'
+'git clone https://github.com/0xtoowan/minishell.git'
 
 Navigate to the project directory:
 'cd minishell'

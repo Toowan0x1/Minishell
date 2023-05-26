@@ -72,7 +72,7 @@ SRC = minishell \
 
 OBJ = $(SRC:=.o)
 
-all: $(NAME) 
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@printf "$(YELLOW)Compiling minishell... %-10.10s$(RESET)\r" $@

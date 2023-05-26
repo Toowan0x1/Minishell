@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:33:31 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/21 17:35:02 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:22:09 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int     is_builtins(char *cmd)
 {
-    if (ft_strncmp(cmd, "echp", 4) == 0 && !cmd[4])
+    if (ft_strncmp(cmd, "echo", 4) == 0 && !cmd[4])
         return (1);
     if (ft_strncmp(cmd, "cd", 2) == 0 && !cmd[2])
         return (1);

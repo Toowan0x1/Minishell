@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/25 02:00:42 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:14:00 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@
 # define STDIN 	0
 # define STDOUT 1
 # define STDERR 2
+
+# define GNL_BUFFER_SIZE    1
+
+# define INFILE     0
+# define OUTFILE    1
 
 typedef struct s_global_vars
 {
@@ -80,20 +85,6 @@ typedef struct s_redirection
 	int		stdout_copy;
 }	t_redirection;
 
-/*
-void	init_cmd_data(t_cmd_data *cmd_data)
-{
-	line = parse_operator(line);
-	cmd_data->parsed_line_args = args_split(line);
-	cmd_data->num_of_cmds = count_cmds(parsed_line_args, '|');;
-	cmd_data->args_tokens = tokenise_cmd(parsed_line_args);;
-	cmd_data->cmd = get_piped_cmd_by_ptr(parsed_line_args, args_tokens);
-	cmd_data->stdout_copy = dup(STDOUT);;
-	cmd_data->stdin_copy = dup(STDIN);
-	cmd_data->i = 0;
-	(void)cmd_data->stdin_copy;
-} */
-
 extern int global_exit;
 
 typedef enum e_token //this
@@ -112,6 +103,10 @@ typedef enum e_token //this
 	EMPTY,			//	
 }	t_token;
 
+
+char	*get_next_line(int fd);
+char	*ft_line(char **line, char **str, int fd, int ret);
+char	*ft_next(char **line, char **str);
 
  /* utils  */
 int		main(int ac, char **av, char **env);

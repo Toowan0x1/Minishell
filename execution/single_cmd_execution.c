@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 01:21:42 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/26 18:42:13 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:01:47 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,19 @@ void	piping_heredoc(char *limiter)
 		write_heredoc(limiter, fd);
 }
 
+void    set_heredoc_token_to_null(char **cmd, int *cmd_token)
+{
+    int i;
+
+    i = 0;
+    while (cmd[i])
+    {
+        if (cmd_token[i] == 10)
+            cmd[i] = NULL;
+        i++;
+    }
+}
+
 void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list)
 {
     int *cmd_tokens = tokenise_cmd(cmd_data->cmd[0]);
@@ -135,6 +148,8 @@ void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, 
             heredoc_outfile_fd = open(ft_strdup(get_heredoc_outfile(cmd_data->cmd[0], cmd_tokens)), O_TRUNC | O_CREAT | O_WRONLY, 0644); // append
         }
         piping_heredoc(heredoc_limiter);
+        set_heredoc_token_to_null(cmd_data->cmd[0], cmd_tokens);
+        exec_cmd(cmd_data->cmd[0], env);
         exit(0);
         }else{
             wait(&pid);

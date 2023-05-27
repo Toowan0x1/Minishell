@@ -60,17 +60,21 @@ SRC = minishell \
 		execution/exec_cmd \
 		execution/exec_builtins \
 		execution/open_outfile \
-		execution/dup_out \
-		execution/dup_in \
-		error_manage/args_error \
-		error_manage/cmd_not_found \
-		error_manage/fork_error \
-		execution/multi_pipes_execution \
-		execution/single_cmd_execution \
+		execution/open_infile \
+		execution/dup_after_piping \
+		execution/dup_before_piping \
+		execution/multi_pipes_exec \
+		execution/single_cmd_exec \
 		execution/execute_line \
+		execution/open_input_output \
 		execution/init_shell_data \
-		execution/heredoc0x0 \
-		execution/heredoc0x1 \
+		execution/heredoc_0x0 \
+		execution/heredoc_0x1 \
+		err_manage/args_error \
+		err_manage/cmd_not_found \
+		err_manage/check_fails \
+		gnl/gnl \
+		env/convert_env \
 
 OBJ = $(SRC:=.o)
 
@@ -86,6 +90,7 @@ $(NAME): $(OBJ)
 clean:
 	@make -s clean -C libft/
 	@rm -f $(OBJ)
+	@rm -rf ./gnl/gnl.o
 	@set -e; \
 	i=0; \
 	while [ $$i -le 10 ]; do \

@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:20:55 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/04/25 22:03:10 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/05/27 01:11:00 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_substr(char const *s, int start, int len)
 {
 	char	*p;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!s)

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/27 10:15:59 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 11:36:50 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ int	main(int ac, char **av, char **env)
 	redirection = malloc(sizeof(t_redirection));
 	cmd_data = malloc(sizeof(t_cmd_data));
 	line = readline(GREEN"minishell ▸ "WHITE);
+	
+	/*	test env here	*/ 
+	char **env_arr = convert_env(env_list);
+	(void)env_arr;
+	// int i=0;
+	// int j=0;
+	// while (env_arr[i])
+	// {
+	// 	while (env_arr[i][j])
+	// 	{
+	// 		printf("%c", env_arr[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
+	/*	the end	 */
+	
 	while (1)
 	{
 		if (line)

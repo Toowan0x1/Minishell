@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:10:18 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 10:33:16 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 12:04:56 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,19 @@ int	count_total_len(t_env *env_list)
 	return (total_len);
 }
 
-char	*concat_name_var(char *new_env, t_env *env_list, int i)
+void	concat_name_var(char **new_env, t_env *env_list, int i)
 {
 	char	*tmp;
-	
-	new_env = ft_strjoin(&env_list->env_name[i], "=");
-	tmp = new_env;
-	free(new_env);
-	new_env = ft_strjoin(tmp, &env_list->env_value[i]);
-	free(tmp);
-	return (new_env);
+	//(void)new_env;
+	//(void)i;
+
+	new_env[i] = ft_strdup(env_list->env_name);
+	tmp = new_env[i];
+	free(new_env[i]);
+	new_env[i] = ft_strjoin(new_env[i], "=");
+	new_env[i] = ft_strjoin(new_env[i], env_list->env_value);
+	printf("%s\n", new_env[i]);
+	/**/
 }
 
 char	**convert_env(t_env *env_list)
@@ -63,13 +66,15 @@ char	**convert_env(t_env *env_list)
 	i = 0;
 	while (env_list)
 	{
+		total_len = 0;
 		if (env_list->unset == 0)
 		{
-			total_len += count_total_len(env_list);
+			total_len = count_total_len(env_list);
+			//printf("%d\n", total_len);
 			new_env[i] = (char *)malloc(sizeof(char) * (total_len + 1));
 			if (!new_env)
 				return (NULL);
-			new_env[i] = concat_name_var(new_env[i], env_list, i);
+			concat_name_var(new_env, env_list, i);
 		}
 		i++;
 		env_list = env_list->next;

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/27 10:51:54 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 11:28:45 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ t_env	*ft_envlst_search(t_env *env, char *searched);
 // }	t_global_vars;
 
 
-
+char	**convert_env(t_env *env_list);
 void    piping(char **cmd, int infile, int outfile, char **env, t_env *env_list, int *token);
 char	*get_cmd_path(char *cmd, char **env);
 char	*path_join(char *dir, char *cmd);

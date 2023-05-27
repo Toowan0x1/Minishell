@@ -40,14 +40,17 @@ SRC = minishell \
 		execution/open_outfile \
 		execution/dup_out \
 		execution/dup_in \
-		error_manage/args_error \
-		error_manage/cmd_not_found \
-		error_manage/fork_error \
 		execution/multi_pipes_execution \
 		execution/single_cmd_execution \
 		execution/execute_line \
 		execution/init_shell_data \
+		execution/heredoc0x0 \
+		execution/heredoc0x1 \
+		err_manage/args_error \
+		err_manage/cmd_not_found \
+		err_manage/check_fails \
 		gnl/gnl \
+		
 		
 
 

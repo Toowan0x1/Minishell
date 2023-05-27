@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/27 00:15:31 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/05/27 06:52:33 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int global_exit;
+int	g_exit;
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	char			*line;
 	t_env			*env_list;
@@ -41,5 +40,3 @@ int main(int ac, char **av, char **env)
 	}
 	return (global_exit);
 }
-
-// pwd makadirch exit

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:21:15 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/21 17:35:07 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 08:55:24 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,5 @@ void    exec_cmd(char **cmd_args, char **env)
     else
         path = get_cmd_path(cmd_args[0], env);
     execve(path, cmd_args, env);
-    ft_putstr_fd("minishell: ", 2);
-    ft_putstr_fd(cmd_args[0], 2);
-    ft_putstr_fd(": command not found\n", 2);
-    exit(127);
-    //error_notcmd(cmd);
+    error_notcmd(cmd_args[0], &g_exit);
 }

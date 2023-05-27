@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:23 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/26 23:52:36 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:14:21 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ static char	*apply_delete(char *tok, int *i)
 	free (tmp[0]);
 	return (tok);
 }
+/*
+echo
 
-static	char	*delete_quoate_tok(char *tok)
+-n"haahah hhaaha hajaoai"
+
+*/
+static char	*delete_quoate_tok(char *tok)
 {
 	int		i;
 
@@ -58,8 +63,7 @@ void	delete_quoate(char **cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		if ((cmd[i] && ft_strchr(cmd[i], '\''))
-			|| (cmd[i] && ft_strchr(cmd[i], '"')))
+		if ((cmd[i] && ft_strchr(cmd[i], '\'')) || (cmd[i] && ft_strchr(cmd[i], '"')))
 			cmd[i] = delete_quoate_tok(cmd[i]);
 		i++;
 	}

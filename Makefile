@@ -69,6 +69,8 @@ SRC = minishell \
 		execution/single_cmd_execution \
 		execution/execute_line \
 		execution/init_shell_data \
+		execution/heredoc0x0 \
+		execution/heredoc0x1 \
 
 OBJ = $(SRC:=.o)
 

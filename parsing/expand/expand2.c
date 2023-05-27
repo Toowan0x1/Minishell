@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:15 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/19 00:25:48 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:17:32 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char    *replacing(char *cmd, int *i)
     char    *str;
     char    *str2;
  
-    exit = ft_itoa(global_exit);
+    exit = ft_itoa(g_exit);
     str = ft_substr(cmd,0,*i);
     str2 = ft_strjoin(str,exit);
     printf("=======> %s\n",exit);

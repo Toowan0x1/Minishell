@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:26 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/19 00:20:30 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:17:11 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int parse_token(int *token_arr)
 {
 	if (check_double_pipe(token_arr) || check_next_oper(token_arr) || pipe_in_end(token_arr))
 	{
-		global_exit = 80;
+		g_exit = 80;
 		return (0);
 	}
 	return (1);

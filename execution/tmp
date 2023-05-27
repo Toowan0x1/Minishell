@@ -1,5 +1,0 @@
-void    establish_io_stream(char **cmd, int *cmd_tokens, t_redirection *redirection) // init output stream + duping
-{
-    establish_output_stream(cmd, cmd_tokens, redirection); // init output stream + duping
-    establish_input_stream(cmd, cmd_tokens, redirection);
-}

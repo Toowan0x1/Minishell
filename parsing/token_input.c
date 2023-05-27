@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:39 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/04/25 21:59:18 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:16:54 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int *tokenise_cmd(char **cmd)
     }
     if(parse_token(cmd_type))
       return (cmd_type); // to do under in exit status
-    global_exit = 2;
+    g_exit = 2;
     free(cmd_type);
     return (0);
 }

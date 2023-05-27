@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multi_pipes_execution.c                            :+:      :+:    :+:   */
+/*   multi_pipes_exec.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 01:21:10 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/25 01:46:25 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:23:06 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, cha
                             redirection->out_fd = cmd_data->stdout_copy;
                     else
                         redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
-                    dup_output_before_piping(redirection);
-	                dup_input_before_piping(redirection);
+	                dup_io_before_piping(redirection);
                     exec_cmd(cmd_data->cmd[i], env);
-                    cmd_not_found(cmd_data->cmd[i][0], &global_exit);
+                    cmd_not_found(cmd_data->cmd[i][0], &g_exit);
                 }
                 else
                 {

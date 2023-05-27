@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:52:38 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/09 20:25:41 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:18:32 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void		exit_cmd(char **cmd)
 		}
 		else
 		{
-			global_exit = ft_atoi(cmd[1]);
-			if (global_exit < 0)
+			g_exit = ft_atoi(cmd[1]);
+			if (g_exit < 0)
 			{
-				global_exit = global_exit * -1;
-				global_exit = 256 - global_exit;
+				g_exit = g_exit * -1;
+				g_exit = 256 - g_exit;
 			}
 			ft_putstr_fd("exit\n", 2);
-			exit(global_exit);
+			exit(g_exit);
 		}
 	}
 	else if (number_of_args(cmd) == 0)

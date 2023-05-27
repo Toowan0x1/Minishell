@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:21:15 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 08:55:24 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:19:46 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void    exec_cmd(char **cmd_args, char **env)
     else
         path = get_cmd_path(cmd_args[0], env);
     execve(path, cmd_args, env);
-    error_notcmd(cmd_args[0], &g_exit);
+    cmd_not_found(cmd_args[0], &g_exit);
 }

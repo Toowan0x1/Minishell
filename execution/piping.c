@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:19:50 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 08:38:47 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:18:58 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    piping(char **cmd, int infile, int outfile, char **env, t_env *env_list,
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 	{
-		global_exit = WEXITSTATUS(status);
+		g_exit = WEXITSTATUS(status);
 		//printf("Child process exited with status: %d\n", global_exit);
 		// Handle exit status as needed
 	}

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/27 09:02:55 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:51:54 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,25 +143,27 @@ char	*get_cmd_path(char *cmd, char **env);
 void     exec_builtins(char **cmd, int *tokens, t_env *env_list);
 int     is_builtins(char *cmd);
 void    exec_cmd(char **cmd_args, char **env);
-void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
 char    *get_env_value(char *env_var, t_env *env_list);
 int		find_env(char *env, t_env *env_list);
 void    set_env(char *env_name, char *env_value, t_env *env_list);
-void    single_cmd_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
-void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
 void	init_cmd_data(t_cmd_data *cmd_data, char *line);
 
 
-void    establish_io_stream(char **cmd, int *cmd_tokens, t_redirection *redirection);
-void    dup_io_before_piping(t_redirection *redirection);
-
+void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
+void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
+void    single_cmd_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
 void	execute_line(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list, char *line);
 
 
 
 /* DUP INPUT/OUTPUT PIPE */
-void	dup_io_before_piping(t_redirection *redirection)
-void	dup_io_after_piping(t_redirection *redirection)
+void	dup_io_before_piping(t_redirection *redirection);
+void	dup_output_before_piping(t_redirection *redirection);
+void	dup_input_before_piping(t_redirection *redirection);
+/* DUP INPUT/OUTPUT PIPE */
+void	dup_io_after_piping(t_redirection *redirection);
+void	dup_output_after_piping(t_redirection *redirection);
+void	dup_input_after_piping(t_redirection *redirection);
 
 /* ESTABLISH BOTH I/O */
 void	establish_io_stream(char **cmd, int *cmd_tokens, t_redirection *redirection);

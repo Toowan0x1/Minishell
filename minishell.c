@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 22:00:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/27 06:52:33 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/27 10:15:59 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)av;
 	check_argc(ac);
-	global_exit = 0;
+	g_exit = 0;
 	env_list = create_env_list(env);
 	redirection = malloc(sizeof(t_redirection));
 	cmd_data = malloc(sizeof(t_cmd_data));
@@ -38,5 +38,5 @@ int	main(int ac, char **av, char **env)
 			execute_line(cmd_data, redirection, env, env_list, line);
 		line = readline(GREEN"minishell ▸ "WHITE);
 	}
-	return (global_exit);
+	return (g_exit);
 }

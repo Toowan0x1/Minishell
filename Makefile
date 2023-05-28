@@ -75,6 +75,7 @@ SRC = minishell \
 		err_manage/check_fails \
 		gnl/gnl \
 		env/convert_env \
+		env/get_env_value \
 
 OBJ = $(SRC:=.o)
 
@@ -95,7 +96,7 @@ clean:
 	i=0; \
 	while [ $$i -le 10 ]; do \
 		printf "$(YELLOW)Deleting objects...\r" $$((i * 10)); \
-		sleep 1; \
+		sleep 0.35; \
 		i=$$((i + 10)); \
 	done
 	@echo "$(GREEN)✅ Cleaning complete. $(RESET)"
@@ -108,7 +109,7 @@ fclean: clean
 	i=0; \
 	while [ $$i -le 10 ]; do \
 		printf "$(YELLOW)Deleting executable... \r" $$((i * 10)); \
-		sleep 1; \
+		sleep 0.35; \
 		i=$$((i + 10)); \
 	done
 	@echo "$(GREEN)✅ Deletion complete. $(RESET)"

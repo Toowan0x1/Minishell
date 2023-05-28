@@ -6,11 +6,24 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:10:18 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 12:04:56 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/28 03:45:31 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	free_all_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
+}
 
 int	count_total_nodes(t_env *env_list)
 {
@@ -39,16 +52,12 @@ int	count_total_len(t_env *env_list)
 void	concat_name_var(char **new_env, t_env *env_list, int i)
 {
 	char	*tmp;
-	//(void)new_env;
-	//(void)i;
 
-	new_env[i] = ft_strdup(env_list->env_name);
-	tmp = new_env[i];
+	new_env[i] = ft_strjoin(env_list->env_name, "=");
+	tmp = ft_strdup(new_env[i]);
 	free(new_env[i]);
-	new_env[i] = ft_strjoin(new_env[i], "=");
-	new_env[i] = ft_strjoin(new_env[i], env_list->env_value);
-	printf("%s\n", new_env[i]);
-	/**/
+	new_env[i] = ft_strjoin(tmp, env_list->env_value);
+	free(tmp);
 }
 
 char	**convert_env(t_env *env_list)

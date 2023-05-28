@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 21:59:40 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/27 11:28:45 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/28 04:09:34 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_env
 {
 	char    		*env_name;
 	char    		*env_value;
+	char			**env_dbl;
 	int				unset;
 	struct s_env 	*next;
 	struct s_env 	*prev;
@@ -101,8 +102,6 @@ typedef struct t_heredoc_data
 }	t_heredoc_data;
 
 
-
-
  /* utils  */
 int		main(int ac, char **av, char **env);
 void	prompt(t_env *env_list);
@@ -117,43 +116,34 @@ t_env	*create_env_list(char **env);
 t_env	*ft_envlst_new(char *str);
 t_env	*ft_envlst_search(t_env *env, char *searched);
 
-// typedef	struct s_global_vars
-// {
-// 	char	**parsed_line_args;
-// 	int		num_of_cmds;
-//     int		*args_tokens;
-//     char	***cmd;
-//     int		i;
-//     int		out_fd;
-//     int		stdout_copy;
-//     int		stdin_copy;
-// }	t_var; // cmd_exec_vars
-
-// typedef struct s_global_vars
-// {
-// 	int	num_of_cmds;
-// }	t_global_vars;
-
 
 char	**convert_env(t_env *env_list);
-void    piping(char **cmd, int infile, int outfile, char **env, t_env *env_list, int *token);
+void    piping(char **cmd, int infile, int outfile, t_env *env_list, int *token);
 char	*get_cmd_path(char *cmd, char **env);
 char	*path_join(char *dir, char *cmd);
 char	*get_cmd_path(char *cmd, char **env);
 void     exec_builtins(char **cmd, int *tokens, t_env *env_list);
 int     is_builtins(char *cmd);
-void    exec_cmd(char **cmd_args, char **env);
+void    exec_cmd(char **cmd_args, char **env_dbl);
 char    *get_env_value(char *env_var, t_env *env_list);
 int		find_env(char *env, t_env *env_list);
 void    set_env(char *env_name, char *env_value, t_env *env_list);
 void	init_cmd_data(t_cmd_data *cmd_data, char *line);
 
+char    *get_env_value(char *env_var, t_env *env_list);
 
-void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
-void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
-void    single_cmd_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list);
-void	execute_line(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list, char *line);
 
+void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list);
+void    single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list);
+void    single_cmd_execution(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list);
+void	execute_line(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list, char *line);
+
+
+void	free_all_env(char **env);
+int		count_total_nodes(t_env *env_list);
+int		count_total_len(t_env *env_list);
+void	concat_name_var(char **new_env, t_env *env_list, int i);
+char	**convert_env(t_env *env_list);
 
 
 /* DUP INPUT/OUTPUT PIPE */
@@ -195,7 +185,7 @@ void    get_heredoc_limiter(char **cmd, int *cmd_token, t_heredoc_data *heredoc_
 
 /* ERR_MANAGE */
 void    check_argc(int ac);
-void    cmd_not_found(char *cmd, int *global_exit);
+void    cmd_not_found(char *cmd, int *g_exit);
 void	check_fork_fail(pid_t *pid);
 void	check_pipe_fail(int *ret);
 void	check_dup2_fail(int *ret);
@@ -228,6 +218,7 @@ void    delete_quoate(char **cmd);
 int		check_oper_in_last(char *line ,char c);
 char	***get_piped_cmd_by_ptr(char **cmds, int *tokens);
 int		count_cmds(char **cmd, char c);
+void	free_all(char *str, char *str2, char *var_name);
 
 #endif
 

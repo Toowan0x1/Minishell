@@ -6,13 +6,13 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 01:21:10 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 10:23:06 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/28 03:35:30 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list)
+void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list)
 {
     pid_t pid;
             
@@ -26,7 +26,7 @@ void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, cha
                         int *cmd_tokens = tokenise_cmd(cmd_data->cmd[i]);
                         establish_io_stream(cmd_data->cmd[i], cmd_tokens, redirection); // init output stream + duping
                 	    dup_io_before_piping(redirection);
-                        piping(cmd_data->cmd[i], STDIN, redirection->out_fd, env, env_list, cmd_data->args_tokens);
+                        piping(cmd_data->cmd[i], STDIN, redirection->out_fd, env_list, cmd_data->args_tokens);
                         dup_output_after_piping(redirection);
                         i++;
                     }
@@ -37,7 +37,7 @@ void	multi_pipes_execution(t_cmd_data *cmd_data, t_redirection *redirection, cha
                     else
                         redirection->out_fd = open(redirection->outfile, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	                dup_io_before_piping(redirection);
-                    exec_cmd(cmd_data->cmd[i], env);
+                    exec_cmd(cmd_data->cmd[i], env_list->env_dbl);
                     cmd_not_found(cmd_data->cmd[i][0], &g_exit);
                 }
                 else

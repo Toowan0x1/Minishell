@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single_cmd_execution.c                             :+:      :+:    :+:   */
+/*   single_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 01:21:42 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 08:49:06 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/28 03:36:23 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, char **env, t_env *env_list)
+void	single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list)
 {
 	int				*cmd_tokens;
 	t_heredoc_data	*heredoc_data;
@@ -38,7 +38,7 @@ void	single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, cha
 			}
 			piping_heredoc(heredoc_data);
 			if (cmd_tokens[0] == CMD_NAME)
-				exec_cmd(cmd_data->cmd[0], env);
+				exec_cmd(cmd_data->cmd[0], env_list->env_dbl);
 			exit(0);
 		}
 		else
@@ -65,7 +65,7 @@ void	single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, cha
 		{
 			dup2(redirection->out_fd, STDOUT);
 			dup2(redirection->in_fd, STDIN);
-			exec_cmd(cmd_data->cmd[0], env);
+			exec_cmd(cmd_data->cmd[0], env_list->env_dbl);
 		}
 		else if (pid > 0)
 			wait(&pid);

@@ -6,7 +6,7 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:53:43 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/09 21:09:12 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/28 05:34:50 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void    do_export(char *str, t_env *env_list)
     int value_len;
     int flag;
     int i;
+
+    //char *str2 = str;
+    
+    (void)env_list;
 
     i = 0;
     flag = 0;
@@ -43,8 +47,10 @@ void    do_export(char *str, t_env *env_list)
         value_len++;
         i++;
     }
-    char *var = malloc(sizeof(char) * var_len + 1 );
+    char *var = malloc(sizeof(char) * var_len + 1);
     char *val = malloc(sizeof(char) * value_len + 1);
+    //printf("str=%s\n", str);
+    //printf("varLen=%d   valLen=%d\n", var_len, value_len);
     i = 0;
     while (i < var_len)
     {
@@ -63,12 +69,22 @@ void    do_export(char *str, t_env *env_list)
     val[i] = '\0';
 
     t_env   *tail_env;
+    //t_env   *head_env;
+
+    //head_env = env_list;
     while (env_list != NULL)
     {
         if (env_list->next == NULL)
             tail_env = env_list;
         if (ft_strncmp(env_list->env_name, var, var_len) == 0)
+        {
+            //printf("str = %s\n", str2);
+            //char *this = ft_strjoin("unset ", str2);
+            //char **unseted = ft_split(this, ' ');
+            //unset_cmd(unseted, env_list);
+            //printf("unseted    %s    %s  %d\n", env_list->env_name, var, var_len);
             env_list->unset = 1;
+        }
         env_list = env_list->next;
     }
 
@@ -81,6 +97,8 @@ void    do_export(char *str, t_env *env_list)
     new_env->prev = tail_env;
     new_env->next = NULL;
     tail_env->next = new_env;
+
+    //env_list = head_env;
 }
 
 static void    print_export_string(char *str)
@@ -199,3 +217,4 @@ void    export_cmd(char **cmd, t_env *env_list)
     }
     return ;
 }
+// export OLDPWD=./../../../

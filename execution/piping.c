@@ -6,21 +6,19 @@
 /*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:19:50 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 10:18:58 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/28 03:33:51 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    piping(char **cmd, int infile, int outfile, char **env, t_env *env_list, int *token) // t_env env_list
+void    piping(char **cmd, int infile, int outfile, t_env *env_list, int *token)
 {
 	int	fd[2];
 	int	pid;
 	int	status;
 
-	(void)env;
 	(void)token;
-	(void)env_list;
 	pipe(fd);
 	pid = fork();
 	check_fork_fail(&pid);
@@ -35,7 +33,7 @@ void    piping(char **cmd, int infile, int outfile, char **env, t_env *env_list,
 			exit(0);
 		}
 		else
-			exec_cmd(cmd, env);
+			exec_cmd(cmd, env_list->env_dbl);
 	}
 	dup2(fd[0], infile);
 	close(fd[0]);
@@ -44,7 +42,7 @@ void    piping(char **cmd, int infile, int outfile, char **env, t_env *env_list,
 	if (WIFEXITED(status))
 	{
 		g_exit = WEXITSTATUS(status);
-		//printf("Child process exited with status: %d\n", global_exit);
+		//printf("Child process exited with status: %d\n", g_exit);
 		// Handle exit status as needed
 	}
 	else

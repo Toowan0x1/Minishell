@@ -6,14 +6,14 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:12 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/05/18 00:29:33 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/05/28 00:57:32 by oel-houm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
  
  
-static void free_all(char *str,char *str2,char *var_name)
+void free_all(char *str,char *str2,char *var_name)
 {
     free (str);
     free (str2);

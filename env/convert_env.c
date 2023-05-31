@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 09:10:18 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/28 03:45:31 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/31 23:58:42 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char	**convert_env(t_env *env_list)
 		if (env_list->unset == 0)
 		{
 			total_len = count_total_len(env_list);
-			//printf("%d\n", total_len);
 			new_env[i] = (char *)malloc(sizeof(char) * (total_len + 1));
 			if (!new_env)
 				return (NULL);

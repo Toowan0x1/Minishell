@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 04:23:19 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/30 21:07:21 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:38:43 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 
 // error manager 
-static void		print_error(char **args)
+static void	print_error(char **args)
 {
 	ft_putstr_fd("cd: ", 2);
 	if (args[2])
-		ft_putstr_fd("string not in pwd: ", 2); // remove had la9lawi
+		ft_putstr_fd("string not in pwd: ", 2);
 	else
 	{
 		ft_putstr_fd(strerror(errno), 2);
@@ -27,7 +27,7 @@ static void		print_error(char **args)
 	ft_putendl_fd(args[1], 2);
 }
 
-static void update_PWD_and_OLDPWD(char *pwd, t_env *env_list)
+static	void	update_pwd_and_oldpwd(char *pwd, t_env *env_list)
 {
 	char    **export_cwd;
 	char    *tmp_arg;
@@ -87,11 +87,11 @@ static void update_PWD_and_OLDPWD(char *pwd, t_env *env_list)
 
 //void    cd_home();
 
-void cd_cmd(char **cmd, t_env *env_list)
+void	cd_cmd(char **cmd, t_env *env_list)
 {
-	int     cd_ret;
-	char    *path;
-	char    *pwd;
+	int		cd_ret;
+	char	*path;
+	char	*pwd;
 
 	cd_ret = 0;
 	pwd = getcwd(NULL, 0);
@@ -107,10 +107,8 @@ void cd_cmd(char **cmd, t_env *env_list)
 	else
 	{
 		path = ft_strdup(cmd[1]);
-		//printf("\n\n======\n\n");
-		if (ft_strncmp(cmd[1], get_env_value("HOME", env_list), ft_strlen(cmd[1] - 1)) == 0)
-		//printf("%d %d", ft_strlen(cmd[1]), ft_strlen("/Users/oel-houm")+1);
-		//if (ft_strcmp(cmd[1], get_env_value("HOME", env_list)) &&  (ft_strlen(cmd[1]) == 1 + ft_strlen(get_env_value("HOME", env_list))))
+		if (ft_strncmp(cmd[1], get_env_value("HOME", env_list),
+				ft_strlen(cmd[1] - 1)) == 0)
 		{
 			printf("***");
 			path = ft_strdup(get_env_value("HOME", env_list));
@@ -122,19 +120,15 @@ void cd_cmd(char **cmd, t_env *env_list)
 		}
 		else
 		{
-			//cd_home();
-		//int j  =ft_strncmp(path, get_env_value("HOME", env_list), ft_strlen(path));
-		//printf("j=%d\n", j);
-		cd_ret = chdir(path);
-		free(path);
-		//printf("==== %s \n", cmd[1]);
-		if (cd_ret < 0)
-			cd_ret *= -1;
-		if (cd_ret != 0)
-			print_error(cmd);
-		else
-			update_PWD_and_OLDPWD(pwd, env_list);
+			cd_ret = chdir(path);
+			free(path);
+			if (cd_ret < 0)
+				cd_ret *= -1;
+			if (cd_ret != 0)
+				print_error(cmd);
+			else
+				update_pwd_and_oldpwd(pwd, env_list);
 		}
 	}
-	return;
+	return ;
 }

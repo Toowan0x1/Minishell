@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 22:52:38 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 10:18:32 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/05/31 23:44:41 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	number_of_args(char **args)
 	return (--count);
 }
 
-static int	ft_isnum(char *str) // ft_isnum ft_isdigit
+static int	ft_isnum(char *str)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	ft_isnum(char *str) // ft_isnum ft_isdigit
 	return (1);
 }
 
-void		exit_cmd(char **cmd)
+void	exit_cmd(char **cmd)
 {
 	int	i;
 
@@ -50,15 +50,14 @@ void		exit_cmd(char **cmd)
 		{
 			ft_putstr_fd("exit\n", 2);
 			ft_putstr_fd("minishell: exit: ", 2);
-            ft_putstr_fd(cmd[1], 2);
-            ft_putstr_fd(": numeric argument required this\n", 2);
-			//
-            exit(255);
+			ft_putstr_fd(cmd[1], 2);
+			ft_putstr_fd(": numeric argument required this\n", 2);
+			exit(255);
 		}
 		else if (cmd && ft_isnum(cmd[1]) == 1)
 		{
-            ft_putstr_fd("exit\n", 2);
-            ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			ft_putstr_fd("exit\n", 2);
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		}
 	}
 	else if (number_of_args(cmd) == 1)
@@ -69,9 +68,8 @@ void		exit_cmd(char **cmd)
 		{
 			ft_putstr_fd("exit\n", 2);
 			ft_putstr_fd("minishell: exit: ", 2);
-            ft_putstr_fd(cmd[1], 2);
-            ft_putstr_fd(": numeric argument required\n", 2);
-			//
+			ft_putstr_fd(cmd[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			exit(255);
 		}
 		else
@@ -89,7 +87,6 @@ void		exit_cmd(char **cmd)
 	else if (number_of_args(cmd) == 0)
 	{
 		ft_putstr_fd("exit\n", 1);
-		//
 		exit(0);
 	}
 }

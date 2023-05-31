@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   single_cmd_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 01:21:42 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/28 03:36:23 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:09:01 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection, t_env *env_list)
+void	single_cmd_execution1(t_cmd_data *cmd_data, t_redirection *redirection,
+			t_env *env_list)
 {
 	int				*cmd_tokens;
 	t_heredoc_data	*heredoc_data;

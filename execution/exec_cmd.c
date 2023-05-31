@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:21:15 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/28 03:23:54 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:05:15 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ char	*get_cmd_path(char *cmd, char **env)
 	return (cmd);
 }
 
-void    exec_cmd(char **cmd_args, char **env_dbl)
+void	exec_cmd(char **cmd_args, char **env_dbl)
 {
-    char    *path;
+	char	*path;
 
-    if (ft_strichr(cmd_args[0], '/') > -1)
-        path = cmd_args[0];
-    else
-        path = get_cmd_path(cmd_args[0], env_dbl);
-    execve(path, cmd_args, env_dbl);
-    cmd_not_found(cmd_args[0], &g_exit);
+	if (ft_strichr(cmd_args[0], '/') > -1)
+		path = cmd_args[0];
+	else
+		path = get_cmd_path(cmd_args[0], env_dbl);
+	execve(path, cmd_args, env_dbl);
+	cmd_not_found(cmd_args[0], &g_exit);
 }

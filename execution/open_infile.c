@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_infile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 07:09:00 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/27 08:19:15 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:07:53 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_infile_index(int *cmd_tokens, int index)
 }
 
 void	establish_input_stream(char **cmd, int *cmd_tokens, \
-		t_redirection *redirection)
+			t_redirection *redirection)
 {
 	redirection->in_redirection_token = 0;
 	redirection->in_redirection_index = -2;

@@ -1,4 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_manage.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/31 23:59:03 by wbouwach          #+#    #+#             */
+/*   Updated: 2023/06/01 00:01:47 by wbouwach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
 
 /*
  # find_env_value		#
@@ -9,48 +21,48 @@
 
 typedef struct s_env
 {
-	char    *env_name;
-	char    *env_value;
-	struct s_env *next;
-	struct s_env *prev;
-}               t_env;
+	char			*env_name;
+	char			*env_value;
+	struct s_env	*next;
+	struct s_env	*prev;
+}			t_env;
 
 
-int find_env(char **env, t_env *env_list)
+int	find_env(char **env, t_env *env_list)
 {
-    size_t  i;
-    int     len;
+	size_t	i;
+	int		len;
 
-    len = ft_strlen(env);
-    i = 0;
-    while (env_list != NULL)
-    {
-        if (ft_strncmp(env_list->env_name, env, len) == 0)
-        {
-            if (ft_strncmp(env_list->env_name[len + 1], "=", 0) == 0)
-                return (i);
-            i++;
-        }
-        else
-            i++;
-        env_list = env_list->next;
-    }
-    return (0);
+	len = ft_strlen(env);
+	i = 0;
+	while (env_list != NULL)
+	{
+		if (ft_strncmp(env_list->env_name, env, len) == 0)
+		{
+			if (ft_strncmp(env_list->env_name[len + 1], "=", 0) == 0)
+				return (i);
+			i++;
+		}
+		else
+			i++;
+		env_list = env_list->next;
+	}
+	return (0);
 }
 
-void    set_env(char *env, char *new_env, t_env *env_list) // set_env("PWD", pwd)
+void	set_env(char *env, char *new_env, t_env *env_list)
 {
-    size_t  i;
-    int     len;
-    char    *tmp;
-    char    *new;
+	size_t	i;
+	int		len;
+	char	*tmp;
+	char	*new;
 
-    if (!env || !new_env)
-        return;
-    len = ft_strlen(env);
-    i = find_env(env, env_list);
-    if (i != 0)
-    {
-        tmp = ft_substr(env_list);
-    }
+	if (!env || !new_env)
+		return ;
+	len = ft_strlen(env);
+	i = find_env(env, env_list);
+	if (i != 0)
+	{
+		tmp = ft_substr(env_list);
+	}
 }

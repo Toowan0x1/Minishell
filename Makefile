@@ -7,7 +7,7 @@ RESET = \033[0m
 NAME = minishell
 CC = cc
 #CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 LDLIBS = -lreadline -lncurses
 
 OS := $(shell uname)

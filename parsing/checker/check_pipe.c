@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:03 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/04/14 23:30:08 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/05/31 00:39:35 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,21 @@ int check_oper_in_last(char *line ,char c)
         i--;
     if (line[i] == c)
     {
-        printf("syntax error near unexpected token `newline'\n");
+       if(line[i] == '|')
+       {
+            i--;
+            while(line[i])
+            {
+                if (line[i] == '>' || line[i] == '<')
+                {
+                    ft_putstr_fd("minishell: syntax error near unexpected tooooken `|'\n",2);
+                    break;
+                }
+                i--;
+            }
+       }
+       else
+            ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n",2);
         return (1);
     }
     return (0);   

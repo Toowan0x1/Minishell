@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:52:56 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/06/01 00:13:00 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:52:08 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_chars(char *line, char *str)
 		{
 			if (line[i] == str[j])
 			{
-				ft_putstr_fd("minishell: syntax error ", 2);
+				ft_putstr_fd("minishell: syntax error\n", 2);
 				return (1);
 			}
 			j++;

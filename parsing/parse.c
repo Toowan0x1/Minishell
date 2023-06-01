@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 02:49:24 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/06/01 00:43:18 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/06/01 23:54:47 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,26 @@ int	parse(char *line)
 {
 	if (!line || !(*line))
 	{
-		g_exit = 10;
+		g_exit = 258;
 		return (0);
 	}
 	if (check_oper('|', line, 1)
 		|| check_oper('<', line, 2) || check_oper('>', line, 2))
 	{
-		g_exit = 20;
+		g_exit = 258;
 		return (0);
 	}
 	if (check_oper_in_last(line, '|')
-		|| check_oper_in_last(line, '<') || check_oper_in_last(line, '>'))
+		|| check_oper_in_last(line, '<')
+		|| check_oper_in_last(line, '>')
+		|| check_pipe(line))
 	{
-		g_exit = 30;
+		g_exit = 258;
 		return (0);
 	}
-	if (check_chars(line, "\\;") || check_pipe(line)
-		|| is_empty(line) || is_unclosed_quotes(line))
+	if (check_chars(line, "\\;") || is_empty(line) || is_unclosed_quotes(line))
 	{
-		g_exit = 40;
+		g_exit = 1;
 		return (0);
 	}
 	return (1);

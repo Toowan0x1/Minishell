@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:53:03 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/06/01 00:46:46 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/06/01 23:53:05 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_pipe(char *line)
 {
 	if (*line == '|')
 	{
-		ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
+		ft_putstr_fd("minishell :syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
 	return (0);
@@ -36,18 +36,7 @@ int	check_oper_in_last(char *line, char c)
 	if (line[i] == c)
 	{
 		if (line[i] == '|')
-		{
-			i--;
-			while (line[i])
-			{
-				if (line[i] == '>' || line[i] == '<')
-				{
-					ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
-					break ;
-				}
-				i--;
-			}
-		}
+			ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		else
 			ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 04:23:19 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/06/01 00:38:43 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:34:12 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	cd_cmd(char **cmd, t_env *env_list)
 
 	cd_ret = 0;
 	pwd = getcwd(NULL, 0);
+	g_exit = 0;
 	if (cmd[0] && !cmd[1])
 	{
 		path = ft_strdup(get_env_value("HOME", env_list));

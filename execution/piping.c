@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-houm <oel-houm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 17:19:50 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/28 03:33:51 by oel-houm         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:45:53 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void    piping(char **cmd, int infile, int outfile, t_env *env_list, int *token)
 	int	fd[2];
 	int	pid;
 	int	status;
-
 	(void)token;
 	pipe(fd);
 	pid = fork();

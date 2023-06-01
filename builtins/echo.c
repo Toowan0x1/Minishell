@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:40:53 by oel-houm          #+#    #+#             */
-/*   Updated: 2023/05/31 23:43:36 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:35:26 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	echo_cmd(char **line, int *t)
 
 	i = 0;
 	flag_n = 0;
+	g_exit = 0;
 	while (line[i])
 	{
 		if (t[i] == 2)
